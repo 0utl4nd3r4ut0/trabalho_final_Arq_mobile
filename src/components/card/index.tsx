@@ -1,72 +1,43 @@
-import { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import React from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import { Icon } from "native-base";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { styles } from './styles';
+import { styles } from "./styles";
 
-export type CardProps = {
-    id: any;
-    nome: string;
-    email: string;
-    senha: string;
-    confirmaSenha: string;
+export interface CadastroProps {
+  id: string;
+  primeiroNome: string;
+  segundoNome: string;
+  email: string;
+  game: string;
+  cep: string;
+  rua: string;
+  numero: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
 }
-type Props = {
-  data: CardProps;
+
+export interface CardProps {
+  data: CadastroProps;
   onPress: () => void;
 }
 
-export function Card({ data, onPress }: Props) {
-  const [passwordIsVisible, setPasswordIsVisible] = useState(false);
-//console.log(data.nome)
-  
-  function togglePasswordIsVisible() {
-    setPasswordIsVisible(prevState => !prevState);
-  }
-
+export default function Card({ data, onPress }: CardProps) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={togglePasswordIsVisible}>
-        <MaterialIcons
-          name={passwordIsVisible ? "visibility" : "visibility-off"}
-          size={22}
-          color="#888D97"
-        />
-      </TouchableOpacity>
-
-      <View style={styles.content}>
-        <View>
-          <Text style={styles.nome}>
-            {data.nome}
-          </Text>
-          <Text style={styles.email}>
-            {data.email}
-          </Text>
-
-          {
-            passwordIsVisible
-              ?
-              <Text style={styles.password}>
-                {data.senha}
-              </Text>
-              :
-              <Text style={styles.user}>
-                {data.confirmaSenha}
-              </Text>
-          }
-        </View>
+      <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
+        <Text
+          style={styles.nome}>
+        {data.primeiroNome}</Text>
+        <Text> {data.segundoNome}</Text>
+        <TouchableOpacity onPress={onPress}>
+          <Icon as={MaterialCommunityIcons} name="pencil" mx={2} size={23} />
+        </TouchableOpacity>
       </View>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={onPress}
-      >
-        <MaterialIcons
-          name="edit"
-          size={22}
-          color="#888D97"
-        />
-      </TouchableOpacity>
+      <Text style={styles.game}>{`${data.bairro}`}</Text>
+      <Text style={styles.email}>{`${data.rua}${data.numero}`}</Text>
     </View>
   );
 }

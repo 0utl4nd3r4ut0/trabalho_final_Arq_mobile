@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Hook_form",
-    "slug": "Hook_form",
+    "name": "app_crud_form",
+    "slug": "app_crud_form",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
